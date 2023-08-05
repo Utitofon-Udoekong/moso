@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moso/config/theme/app_theme.dart';
 import 'package:moso/features/daily_news/presentation/bloc/article/remote/remote_article_bloc.dart';
+import 'package:moso/features/daily_news/presentation/bloc/bloc_observer.dart';
 import 'package:moso/features/daily_news/presentation/pages/home/daily_News.dart';
 import 'package:moso/injections.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeDependencies();
+  Bloc.observer = AppBlocObserver();
   runApp(const MyApp());
 }
 
@@ -22,6 +24,7 @@ class MyApp extends StatelessWidget {
         title: 'MOSO',
         theme: theme(),
         home: const DailyNews(),
+        debugShowCheckedModeBanner: false,
       ),
     );
   }

@@ -25,9 +25,11 @@ class ArticleRepositoryImpl implements ArticleRepository {
       category: categoryQuery,
     );
 
+      print(httpResponse);
     if(httpResponse.response.statusCode == HttpStatus.ok){
       return DataSuccess(httpResponse.data);
     }else{
+      print(httpResponse.response.statusMessage);
       return DataFailed(
         DioException(requestOptions: httpResponse.response.requestOptions,
         error: httpResponse.response.statusMessage,
@@ -35,6 +37,7 @@ class ArticleRepositoryImpl implements ArticleRepository {
       );
     }
     } on DioException catch (e) {
+      print(e.message);
       return DataFailed(e);
     }
   }
